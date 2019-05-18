@@ -9,27 +9,29 @@ const H1 = styled.h1`
 
 const NumberInput = styled.input`
   width: 10rem;
-  height: 70px;
   box-sizing: border-box;
-  margin: 0.5rem;
   font-size: 2rem;
+  padding: 0.5rem;
+  margin: 10px;
 `;
 
 const SimpleForm = styled.form`
   width: 100%;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 `;
 
 const AddWeightButton = styled.button`
+  cursor: pointer;
   border: none;
   outline: none;
   background: lightblue;
   color: black;
   padding: 0.5rem;
-  height: 70px;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  box-sizing: border-box;
 `;
 
 function App() {
@@ -56,6 +58,9 @@ function App() {
           value={weight}
           onChange={e => {
             setWeight(parseInt(e.target.value));
+          }}
+          onClick={() => {
+            setWeight('');
           }}
         />
         <AddWeightButton>Add Weight</AddWeightButton>
