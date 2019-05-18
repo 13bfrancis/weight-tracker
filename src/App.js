@@ -9,13 +9,13 @@ const H1 = styled.h1`
 
 const NumberInput = styled.input`
   width: 10rem;
-  height: 3rem;
+  height: 70px;
   box-sizing: border-box;
   margin: 0.5rem;
   font-size: 2rem;
 `;
 
-const SimpleForm = styled.div`
+const SimpleForm = styled.form`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -23,8 +23,13 @@ const SimpleForm = styled.div`
 `;
 
 const AddWeightButton = styled.button`
-  padding: 0;
-  height: 3rem;
+  border: none;
+  outline: none;
+  background: lightblue;
+  color: black;
+  padding: 0.5rem;
+  height: 70px;
+  font-size: 1.5rem;
 `;
 
 function App() {
@@ -38,35 +43,31 @@ function App() {
         <span> </span>
         <i className="fas fa-weight" />
       </H1>
-      <SimpleForm>
+      <SimpleForm
+        onSubmit={e => {
+          e.preventDefault();
+          setWeights([...weights, { day: index, weight }]);
+          setIndex(index + 1);
+          setWeight('');
+        }}
+      >
         <NumberInput
           type="number"
           value={weight}
           onChange={e => {
             setWeight(parseInt(e.target.value));
           }}
-          onClick={() => {
-            setWeight('');
-          }}
         />
-        <AddWeightButton
-          onClick={() => {
-            setWeights([...weights, { day: index, weight }]);
-            setIndex(index + 1);
-            setWeight(0);
-          }}
-        >
-          Add Weight
-        </AddWeightButton>
+        <AddWeightButton>Add Weight</AddWeightButton>
       </SimpleForm>
       <div>
-        <h2>
+        <h2 style={{ textAlign: 'center' }}>
           Weights:
           {weights.map((w, i) => (
-            <>
+            <React.Fragment key={i}>
               {w.weight.toString()}
               {i + 1 !== weights.length && ', '}
-            </>
+            </React.Fragment>
           ))}
         </h2>
       </div>
