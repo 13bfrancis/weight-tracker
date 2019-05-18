@@ -45,11 +45,15 @@ function App() {
           onChange={e => {
             setWeight(parseInt(e.target.value));
           }}
+          onClick={() => {
+            setWeight('');
+          }}
         />
         <AddWeightButton
           onClick={() => {
             setWeights([...weights, { day: index, weight }]);
             setIndex(index + 1);
+            setWeight(0);
           }}
         >
           Add Weight
@@ -58,9 +62,12 @@ function App() {
       <div>
         <h2>
           Weights:
-          {weights.map(w => (
-            <>{w.weight.toString()}, </>
-          ))}{' '}
+          {weights.map((w, i) => (
+            <>
+              {w.weight.toString()}
+              {i + 1 !== weights.length && ', '}
+            </>
+          ))}
         </h2>
       </div>
       {weights.length >= 2 && (
